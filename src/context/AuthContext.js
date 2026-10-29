@@ -116,10 +116,11 @@ export function AuthProvider({ children }) {
     setLoading(true);
     setAuthError(null);
     try {
+      const currentOrigin = typeof window !== 'undefined' ? window.location.origin : 'https://hbfit.vercel.app';
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: 'http://localhost:8081',
+          redirectTo: currentOrigin,
         },
       });
       if (error) throw error;
